@@ -2,9 +2,9 @@ package com.cg.tms.dao;
 
 import java.util.*;
 
-import com.cg.tms.entity.Course;
-import com.cg.tms.entity.Program;
-import com.cg.tms.entity.Trainer;
+import com.cg.tms.beans.Course;
+import com.cg.tms.beans.Program;
+import com.cg.tms.beans.Trainer;
 
 /**
  * 

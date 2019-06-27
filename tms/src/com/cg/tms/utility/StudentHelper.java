@@ -1,7 +1,7 @@
 
 package com.cg.tms.utility;
 
-import com.cg.tms.entity.Student;
+import com.cg.tms.beans.Student;
 
 public class StudentHelper {
 

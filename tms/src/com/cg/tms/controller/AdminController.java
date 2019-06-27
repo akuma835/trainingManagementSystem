@@ -1,8 +1,8 @@
 package com.cg.tms.controller;
 
-import com.cg.tms.entity.Course;
-import com.cg.tms.entity.Feedback;
-import com.cg.tms.entity.Trainer;
+import com.cg.tms.beans.Course;
+import com.cg.tms.beans.Feedback;
+import com.cg.tms.beans.Trainer;
 
 /**
  * 

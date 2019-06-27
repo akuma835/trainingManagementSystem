@@ -1,7 +1,7 @@
 package com.cg.tms.dao;
 import java.util.*;
 
-import com.cg.tms.entity.Feedback;
+import com.cg.tms.beans.Feedback;
 
 /**
  * 

@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.cg.tms.entity.Center;
-import com.cg.tms.entity.Course;
-import com.cg.tms.entity.Program;
-import com.cg.tms.entity.Student;
-import com.cg.tms.entity.Trainer;
-import com.cg.tms.entity.TrainingProgram;
+import com.cg.tms.beans.Center;
+import com.cg.tms.beans.Course;
+import com.cg.tms.beans.Program;
+import com.cg.tms.beans.Student;
+import com.cg.tms.beans.Trainer;
+import com.cg.tms.beans.TrainingProgram;
 import com.cg.tms.enums.Skills;
 
 public class DatabaseCollection {

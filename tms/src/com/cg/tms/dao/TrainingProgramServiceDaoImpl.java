@@ -6,7 +6,7 @@ import java.util.Set;
 
 import com.cg.exception.DatabaseWriteException;
 import com.cg.exception.TrainingProgramNotFoundException;
-import com.cg.tms.entity.Program;
+import com.cg.tms.beans.Program;
 
 public class TrainingProgramServiceDaoImpl implements CrudService<Program> {
 

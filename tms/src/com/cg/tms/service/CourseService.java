@@ -5,7 +5,7 @@ import java.util.*;
 import com.cg.exception.CourseNotFoundException;
 import com.cg.exception.DatabaseWriteException;
 import com.cg.exception.TrainingProgramNotFoundException;
-import com.cg.tms.entity.Course;
+import com.cg.tms.beans.Course;
 
 /**
  * 

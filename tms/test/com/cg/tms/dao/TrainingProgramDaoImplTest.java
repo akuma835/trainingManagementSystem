@@ -9,11 +9,11 @@ import org.junit.Test;
 
 import com.cg.exception.DatabaseWriteException;
 import com.cg.exception.TrainingProgramNotFoundException;
+import com.cg.tms.beans.Center;
+import com.cg.tms.beans.Course;
+import com.cg.tms.beans.Program;
+import com.cg.tms.beans.Trainer;
 import com.cg.tms.dao.DatabaseCollection;
-import com.cg.tms.entity.Center;
-import com.cg.tms.entity.Course;
-import com.cg.tms.entity.Program;
-import com.cg.tms.entity.Trainer;
 import com.cg.tms.service.TrainingProgramServiceImpl;
 
 public class TrainingProgramDaoImplTest {

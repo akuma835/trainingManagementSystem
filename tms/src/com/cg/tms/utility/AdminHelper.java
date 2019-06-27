@@ -1,9 +1,9 @@
 package com.cg.tms.utility;
 
 
-import com.cg.tms.entity.Course;
-import com.cg.tms.entity.Feedback;
-import com.cg.tms.entity.Trainer;
+import com.cg.tms.beans.Course;
+import com.cg.tms.beans.Feedback;
+import com.cg.tms.beans.Trainer;
 import com.cg.tms.service.CourseService;
 import com.cg.tms.service.FeedbackService;
 import com.cg.tms.service.TrainerService;

@@ -1,8 +1,8 @@
 package com.cg.tms.dao;
 
-import com.cg.tms.entity.Program;
-import com.cg.tms.entity.Student;
-import com.cg.tms.entity.TrainingProgram;
+import com.cg.tms.beans.Program;
+import com.cg.tms.beans.Student;
+import com.cg.tms.beans.TrainingProgram;
 
 public class StudentServiceDaoImpl implements IStudentManagement {
 

@@ -2,8 +2,8 @@ package com.cg.tms.dao;
 
 import java.util.List;
 
-import com.cg.tms.entity.Center;
-import com.cg.tms.entity.Student;
+import com.cg.tms.beans.Center;
+import com.cg.tms.beans.Student;
 
 public class FetchStudentImpl implements IFetchAllDetails<Student> {
 

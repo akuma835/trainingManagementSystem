@@ -2,8 +2,8 @@ package com.cg.tms.controller;
 
 import java.util.*;
 
-import com.cg.tms.entity.Program;
-import com.cg.tms.entity.Student;
+import com.cg.tms.beans.Program;
+import com.cg.tms.beans.Student;
 
 public class StudentController {
 

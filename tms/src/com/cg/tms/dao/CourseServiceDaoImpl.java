@@ -3,7 +3,7 @@ package com.cg.tms.dao;
 import java.util.*;
 
 import com.cg.exception.CourseNotFoundException;
-import com.cg.tms.entity.Course;
+import com.cg.tms.beans.Course;
 
 /**
  * 

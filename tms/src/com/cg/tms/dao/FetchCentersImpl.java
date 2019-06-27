@@ -3,7 +3,7 @@ package com.cg.tms.dao;
 
 import java.util.List;
 
-import com.cg.tms.entity.Center;
+import com.cg.tms.beans.Center;
 
 public class FetchCentersImpl implements IFetchAllDetails<Center> {
 

@@ -1,4 +1,4 @@
-package com.cg.tms.entity;
+package com.cg.tms.beans;
 
 import java.time.LocalDate;
 import java.util.*;

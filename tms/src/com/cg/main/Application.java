@@ -5,9 +5,9 @@ import java.util.Scanner;
 import com.cg.exception.CourseNotFoundException;
 import com.cg.exception.DatabaseWriteException;
 import com.cg.exception.TrainingProgramNotFoundException;
+import com.cg.tms.beans.Program;
 import com.cg.tms.controller.CoordinatorController;
 import com.cg.tms.dao.DatabaseCollection;
-import com.cg.tms.entity.Program;
 import com.cg.tms.service.CourseService;
 
 public class Application {

@@ -1,7 +1,7 @@
 package com.cg.tms.service;
 
-import com.cg.tms.entity.Feedback;
-import com.cg.tms.entity.Program;
+import com.cg.tms.beans.Feedback;
+import com.cg.tms.beans.Program;
 
 public interface FeedbackService {
 
