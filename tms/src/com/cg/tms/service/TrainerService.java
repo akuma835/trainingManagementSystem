@@ -7,6 +7,7 @@ import com.cg.exception.DatabaseWriteException;
 import com.cg.exception.TrainingProgramNotFoundException;
 import com.cg.tms.beans.Trainer;
 import com.cg.tms.enums.Skills;
+import com.cg.tms.exception.ProgramException;
 
 /**
  * 
@@ -27,15 +28,18 @@ public interface TrainerService {
 	 * @throws DatabaseWriteException 
 	 * @throws CourseNotFoundException 
 	 * @throws TrainingProgramNotFoundException 
+	 * @throws ProgramException 
 	 * 
 	 */
-	public Trainer getTrainerDetails(String trainerId) throws DatabaseWriteException, CourseNotFoundException, TrainingProgramNotFoundException;
+	public Trainer getTrainerDetails(String trainerId) throws ProgramException;
 
 	/**
 	 * @throws DatabaseWriteException 
+	 * @throws ProgramException 
+	 * @throws CourseNotFoundException 
 	 * 
 	 */
-	public Set<Trainer> getAllTrainers() throws DatabaseWriteException;
+	public Set<Trainer> getAllTrainers() throws ProgramException;
 
 	/**
 	 * 

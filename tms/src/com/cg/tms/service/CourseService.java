@@ -6,6 +6,7 @@ import com.cg.exception.CourseNotFoundException;
 import com.cg.exception.DatabaseWriteException;
 import com.cg.exception.TrainingProgramNotFoundException;
 import com.cg.tms.beans.Course;
+import com.cg.tms.exception.ProgramException;
 
 /**
  * 
@@ -29,16 +30,19 @@ public interface CourseService {
 
 	/**
 	 * @throws DatabaseWriteException
+	 * @throws ProgramException 
+	 * @throws CourseNotFoundException 
 	 * 
 	 */
-	public Set<Course> getAllCourse() throws DatabaseWriteException;
+	public Set<Course> getAllCourse() throws ProgramException;
 
 	/**
 	 * @throws DatabaseWriteException
 	 * @throws CourseNotFoundException 
 	 * @throws TrainingProgramNotFoundException 
+	 * @throws ProgramException 
 	 * 
 	 */
-	public Course getCourseDetails(String courseId) throws DatabaseWriteException, CourseNotFoundException, TrainingProgramNotFoundException;
+	public Course getCourseDetails(String courseId) throws ProgramException;
 
 }

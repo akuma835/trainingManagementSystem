@@ -1,33 +1,41 @@
 package com.cg.tms.dao;
 
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.cg.tms.beans.Course;
-import com.cg.tms.beans.Program;
 import com.cg.tms.beans.Trainer;
+import com.cg.tms.enums.Skills;
+import com.cg.tms.exception.ErrorMessages;
+import com.cg.tms.exception.ProgramException;
+import com.cg.tms.util.ConnectionDB;
+import com.cg.tms.util.DBQueries;
 
 /**
  * 
  */
+
 public class TrainerServiceDaoImpl implements CrudService<Trainer> {
-	Set<Trainer> trainers = new HashSet<Trainer>();
-	Iterator<Trainer> trainerIterator = trainers.iterator();
+	private Connection connection;
+
+//	Iterator<Trainer> trainerIterator = trainers.iterator();
 	@Override
 	public boolean create(Trainer o) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean update(Trainer o) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Trainer retrieve(String trainerId) {
-		retrieveAll();
-		for (Trainer trainer : trainers) {
+	public Trainer retrieve(String trainerId) throws ProgramException {
+		Set<Trainer> trainerSet = retrieveAll();
+		for (Trainer trainer : trainerSet) {
 			if (trainerId.equals(trainer.getTrainerId())) {
 				return trainer;
 			}
@@ -38,17 +46,59 @@ public class TrainerServiceDaoImpl implements CrudService<Trainer> {
 
 	@Override
 	public boolean delete(Trainer o) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Set<Trainer> retrieveAll() {
-		trainers.addAll(DatabaseCollection.trainer);
-		return trainers;
-		
-	}
+	public Set<Trainer> retrieveAll() throws ProgramException {
+		connection = ConnectionDB.getConnection();
+		Set<Trainer> trainers = new HashSet<Trainer>();
+		String trainersql = DBQueries.GET_ALL_TRAINER;
+		String skillSql = DBQueries.GET_SKILL_FOR_TRAINER;
 
-	
+		try {
+			PreparedStatement preparedStatementTrainers = connection.prepareStatement(trainersql);
+//			PreparedStatement preparedStatementSkills;
+			ResultSet resultSetforTrainers = preparedStatementTrainers.executeQuery();
+			
+
+			while (resultSetforTrainers.next()) {
+				Trainer trainer = new Trainer();
+				trainer.setTrainerId(resultSetforTrainers.getString(1));
+				trainer.setTrainerName(resultSetforTrainers.getString(2));
+				
+				PreparedStatement preparedStatementSkills= connection.prepareStatement(skillSql);
+				preparedStatementSkills.setString(1, resultSetforTrainers.getString(1));
+				ResultSet resultSet = preparedStatementSkills.executeQuery();
+//				preparedStatementSkills.clearParameters();
+				Set<Skills> skills = new HashSet<Skills>();
+
+				while (resultSet.next()) {
+					skills.add(Skills.valueOf(resultSet.getString(1)));
+				}
+				resultSet.close();
+				trainer.setSkills(skills);
+
+				trainers.add(trainer);
+			}
+
+//			preparedStatementSkills.close();
+			resultSetforTrainers.close();
+			preparedStatementTrainers.close();
+//			connection.close();
+
+		} catch (SQLException e) {
+			try {
+				connection.close();
+			} catch (SQLException e1) {
+				throw new ProgramException(ErrorMessages.MESSAGE3);
+			}
+			throw new ProgramException(ErrorMessages.MESSAGE2);
+		}
+
+//		trainers.addAll(DatabaseCollection.trainer);
+		return trainers;
+
+	}
 
 }

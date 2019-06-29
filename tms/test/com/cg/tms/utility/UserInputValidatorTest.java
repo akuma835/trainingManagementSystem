@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.cg.exception.InvalidFormatInput;
-import com.cg.tms.utility.UserInputValidator;
+import com.cg.tms.util.UserInputValidator;
 
 public class UserInputValidatorTest {
 

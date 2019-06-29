@@ -7,10 +7,13 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import com.cg.exception.CourseNotFoundException;
 import com.cg.exception.DatabaseWriteException;
-
 import com.cg.exception.InvalidFormatInput;
 import com.cg.exception.TrainingProgramNotFoundException;
 import com.cg.tms.beans.Center;
@@ -18,20 +21,20 @@ import com.cg.tms.beans.Course;
 import com.cg.tms.beans.Program;
 import com.cg.tms.beans.Student;
 import com.cg.tms.beans.Trainer;
-import com.cg.tms.beans.TrainingProgram;
 import com.cg.tms.dao.DatabaseCollection;
 import com.cg.tms.dao.FetchCentersImpl;
 import com.cg.tms.dao.IFetchAllDetails;
 import com.cg.tms.dao.IStudentManagement;
 import com.cg.tms.dao.StudentServiceDaoImpl;
+import com.cg.tms.exception.ProgramException;
 import com.cg.tms.service.CourseService;
 import com.cg.tms.service.CourseServiceImpl;
 import com.cg.tms.service.TrainerService;
 import com.cg.tms.service.TrainerServiceImpl;
 import com.cg.tms.service.TrainingProgramService;
 import com.cg.tms.service.TrainingProgramServiceImpl;
-import com.cg.tms.utility.CoordinatorHelper;
-import com.cg.tms.utility.UserInputValidator;
+import com.cg.tms.util.CoordinatorHelper;
+import com.cg.tms.util.UserInputValidator;
 
 public class CoordinatorController {
 	Scanner scanner;
@@ -51,7 +54,7 @@ public class CoordinatorController {
 	}
 
 	public void choice1Selection()
-			throws CourseNotFoundException, DatabaseWriteException, DateTimeParseException, InvalidFormatInput {
+			throws InvalidFormatInput, ProgramException {
 		scanner = new Scanner(System.in);
 		System.out.println("Select your option:---");
 		System.out.println("1. Create a Training Program");
@@ -94,7 +97,7 @@ public class CoordinatorController {
 
 	}
 
-	private void getProgramDetails() throws DatabaseWriteException, TrainingProgramNotFoundException, InvalidFormatInput {
+	private void getProgramDetails() throws ProgramException{
 		System.out.println("Enter the Training Program Id from the list of Available Programs");
 		getAllRunningPrograms();
 		final String trainingId = scanner.next();
@@ -116,14 +119,29 @@ public class CoordinatorController {
 
 	}
 
-	private void getAllRunningPrograms() throws DatabaseWriteException {
+	private void getAllRunningPrograms() throws ProgramException{
 		System.out.println("Currently Running Programs:******************");
 		Set<Program> programs = traingingProgramOpn.retrieveAllTrainingProgram();
-		programs.forEach(System.out::println);
+//		programs.forEach(System.out::println);
+//		programs.forEach();
+//		programs.forEach(System.out.println((p)->p.getTrainingId().equals("TP_1001")));
+		Stream<Program> stream = programs.stream();
+		
+//		programs.
+	
+		Predicate<Program> p1 = (p)->p.getTrainingId().equals("TP_1002");
+		Consumer<Program> c1 = (p)->{
+//			if(p1.test(p))
+			System.out.println(p);
+		
+		};
+//		Supplier<Program> s1 = new 
+		stream.filter(p1).forEach(c1);
+//		programs.forEach(c1);
 
 	}
 
-	private void deleteProgram() throws DatabaseWriteException, TrainingProgramNotFoundException, InvalidFormatInput {
+	private void deleteProgram() throws ProgramException{
 		System.out.println("Select the trainingProgram You want to delete");
 		getAllRunningPrograms();
 		System.out.println("Enter the Training Program Id");
@@ -137,8 +155,8 @@ public class CoordinatorController {
 		System.out.println("After Deletion" + DatabaseCollection.program.size());
 	}
 
-	private void createProgram() throws DatabaseWriteException, DateTimeParseException, CourseNotFoundException,
-			InvalidFormatInput, TrainingProgramNotFoundException {
+	private void createProgram() throws ProgramException,
+			InvalidFormatInput, TrainingProgramNotFoundException, ProgramException {
 		System.out.println("Enter Training start " + "Date: yyyy-mm-dd ");
 		final String inputDate = scanner.next();
 		CoordinatorHelper.isDatenotExpired(inputDate);
@@ -185,7 +203,7 @@ public class CoordinatorController {
 
 	}
 
-	public void choice2Selection() throws InvalidFormatInput, DatabaseWriteException, TrainingProgramNotFoundException {
+	public void choice2Selection() throws InvalidFormatInput, DatabaseWriteException, TrainingProgramNotFoundException, ProgramException, CourseNotFoundException {
 		scanner = new Scanner(System.in);
 		System.out.println("Select your option:---");
 		System.out.println("1. Enroll Student");
@@ -210,7 +228,7 @@ public class CoordinatorController {
 
 	}
 
-	private void enrollStudent() throws InvalidFormatInput, DatabaseWriteException, TrainingProgramNotFoundException {
+	private void enrollStudent() throws InvalidFormatInput, DatabaseWriteException, TrainingProgramNotFoundException, ProgramException, CourseNotFoundException {
 
 		System.out.println("Enter the Student First Name");
 		String studentFirstName = scanner.next();

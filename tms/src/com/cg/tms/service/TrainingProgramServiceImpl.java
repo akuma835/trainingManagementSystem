@@ -10,6 +10,8 @@ import com.cg.tms.beans.Program;
 import com.cg.tms.dao.CourseServiceDaoImpl;
 import com.cg.tms.dao.CrudService;
 import com.cg.tms.dao.TrainingProgramServiceDaoImpl;
+import com.cg.tms.exception.ErrorMessages;
+import com.cg.tms.exception.ProgramException;
 
 /**
  * 
@@ -19,15 +21,14 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
 	CrudService<Program> crudOnTrainingProgram = new TrainingProgramServiceDaoImpl();
 
 	@Override
-	public boolean createProgram(Program trainingProgram) throws DatabaseWriteException {
+	public boolean createProgram(Program trainingProgram) throws ProgramException {
 		boolean flag = false;
 		flag = crudOnTrainingProgram.create(trainingProgram);
 		return flag;
 	}
 
 	@Override
-	public boolean deleteTrainingProgram(String trainingId)
-			throws DatabaseWriteException, TrainingProgramNotFoundException {
+	public boolean deleteTrainingProgram(String trainingId) throws ProgramException {
 		Program program = retrieveTrainingProgram(trainingId);
 		if (program == null) {
 
@@ -42,7 +43,7 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
 	}
 
 	public boolean validateCourse(String courseId)
-			throws DatabaseWriteException, CourseNotFoundException, TrainingProgramNotFoundException {
+			throws ProgramException {
 		final Course course = crudOnCourse.retrieve(courseId);
 		if (course != null)
 			return true;
@@ -53,7 +54,7 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
 
 	@Override
 	public Program retrieveTrainingProgram(String trainingId)
-			throws DatabaseWriteException, TrainingProgramNotFoundException {
+			throws ProgramException{
 		Set<Program> trainingPrograms = retrieveAllTrainingProgram();
 		Program program = null;
 		for (Program trainingProgram : trainingPrograms) {
@@ -63,13 +64,14 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
 			}
 		}
 		if (program == null) {
-			throw new TrainingProgramNotFoundException("Sorry Training Program not found! Unable to delete");
+			throw new ProgramException(ErrorMessages.MESSAGE6);
 		}
 		return program;
 	}
 
 	@Override
-	public Set<Program> retrieveAllTrainingProgram() throws DatabaseWriteException {
+	public Set<Program> retrieveAllTrainingProgram()
+			throws ProgramException{
 		Set<Program> trainingPrograms;
 		trainingPrograms = crudOnTrainingProgram.retrieveAll();
 		return trainingPrograms;

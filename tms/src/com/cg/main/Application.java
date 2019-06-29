@@ -8,6 +8,7 @@ import com.cg.exception.TrainingProgramNotFoundException;
 import com.cg.tms.beans.Program;
 import com.cg.tms.controller.CoordinatorController;
 import com.cg.tms.dao.DatabaseCollection;
+import com.cg.tms.exception.ProgramException;
 import com.cg.tms.service.CourseService;
 
 public class Application {
@@ -37,7 +38,7 @@ public class Application {
 		case 1:
 			try {
 				coordinatorController.choice1Selection();
-			} catch (DatabaseWriteException | CourseNotFoundException e) {
+			} catch (ProgramException e) {
 				System.err.println(e.getMessage());
 			} catch (Exception e) {
 				System.err.println("Some Error Occured! Please Try after some time");

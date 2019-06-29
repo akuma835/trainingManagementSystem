@@ -11,6 +11,7 @@ import com.cg.tms.dao.CourseServiceDaoImpl;
 import com.cg.tms.dao.CrudService;
 import com.cg.tms.dao.TrainerServiceDaoImpl;
 import com.cg.tms.enums.Skills;
+import com.cg.tms.exception.ProgramException;
 
 /**
  * 
@@ -28,14 +29,14 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public Trainer getTrainerDetails(String trainerId) throws DatabaseWriteException, CourseNotFoundException, TrainingProgramNotFoundException {
+	public Trainer getTrainerDetails(String trainerId) throws ProgramException {
 		Trainer trainer = crudOperation.retrieve(trainerId);
 
 		return trainer;
 	}
 
 	@Override
-	public Set<Trainer> getAllTrainers() throws DatabaseWriteException {
+	public Set<Trainer> getAllTrainers() throws ProgramException{
 		return crudOperation.retrieveAll();
 	}
 

@@ -4,6 +4,8 @@ import java.util.*;
 
 import com.cg.exception.CourseNotFoundException;
 import com.cg.tms.beans.Course;
+import com.cg.tms.exception.ErrorMessages;
+import com.cg.tms.exception.ProgramException;
 
 /**
  * 
@@ -25,7 +27,7 @@ public class CourseServiceDaoImpl implements CrudService<Course> {
 	}
 
 	@Override
-	public Course retrieve(String courseId) throws CourseNotFoundException {
+	public Course retrieve(String courseId) throws ProgramException {
 
 		Set<Course> courses;
 		courses=retrieveAll();
@@ -36,8 +38,7 @@ public class CourseServiceDaoImpl implements CrudService<Course> {
 			}
 		}
 		if (course==null)
-			throw new CourseNotFoundException("Course Not Available");
-
+			throw new ProgramException(ErrorMessages.MESSAGE7);
 		return course;
 	}
 

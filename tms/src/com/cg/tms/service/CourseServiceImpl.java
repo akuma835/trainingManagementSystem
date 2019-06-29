@@ -8,6 +8,7 @@ import com.cg.exception.TrainingProgramNotFoundException;
 import com.cg.tms.beans.Course;
 import com.cg.tms.dao.CourseServiceDaoImpl;
 import com.cg.tms.dao.CrudService;
+import com.cg.tms.exception.ProgramException;
 
 /**
  * 
@@ -34,12 +35,12 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public Set<Course> getAllCourse() throws DatabaseWriteException {
+	public Set<Course> getAllCourse() throws ProgramException {
 		return crudOperation.retrieveAll();
 	}
 
 	@Override
-	public Course getCourseDetails(final String courseId) throws DatabaseWriteException, CourseNotFoundException, TrainingProgramNotFoundException {
+	public Course getCourseDetails(final String courseId) throws ProgramException {
 		Course course = crudOperation.retrieve(courseId);
 
 		return course;

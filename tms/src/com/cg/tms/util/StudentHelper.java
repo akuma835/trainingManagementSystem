@@ -1,5 +1,5 @@
 
-package com.cg.tms.utility;
+package com.cg.tms.util;
 
 import com.cg.tms.beans.Student;
 

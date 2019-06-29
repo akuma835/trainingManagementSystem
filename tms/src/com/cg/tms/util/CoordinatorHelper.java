@@ -1,5 +1,5 @@
 
-package com.cg.tms.utility;
+package com.cg.tms.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

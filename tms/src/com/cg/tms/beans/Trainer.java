@@ -18,6 +18,8 @@ public class Trainer {
 		this.skills = skills;
 		trainerSeq++;
 	}
+	public Trainer() {
+	}
 	public String getTrainerId() {
 		return trainerId;
 	}
