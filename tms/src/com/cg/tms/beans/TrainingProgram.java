@@ -1,10 +1,21 @@
 package com.cg.tms.beans;
 
-public class TrainingProgram {
+import java.io.Serializable;
+
+public class TrainingProgram implements Serializable {
 	
+	/**
+	 * Variables
+	 */
+	private static final long serialVersionUID = 1L;
 	private Student student;
 	private Program program;
 	
+	/***
+	 * Constructors
+	 * @param student
+	 * @param program
+	 */
 	public TrainingProgram(Student student, Program program) {
 		super();
 		this.student = student;

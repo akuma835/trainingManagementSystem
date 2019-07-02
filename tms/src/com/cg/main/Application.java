@@ -2,9 +2,6 @@ package com.cg.main;
 
 import java.util.Scanner;
 
-import com.cg.exception.CourseNotFoundException;
-import com.cg.exception.DatabaseWriteException;
-import com.cg.exception.TrainingProgramNotFoundException;
 import com.cg.tms.beans.Program;
 import com.cg.tms.controller.CoordinatorController;
 import com.cg.tms.dao.DatabaseCollection;
@@ -13,50 +10,49 @@ import com.cg.tms.service.CourseService;
 
 public class Application {
 	static Scanner scanner;
-	CourseService courseOperation;
-	CoordinatorController coordinatorController;
-	Program trainingProgram;
+	private CourseService courseOperation;
+	private CoordinatorController coordinatorController;
+	private Program trainingProgram;
 
-	public static void main(String[] args) throws CourseNotFoundException, Exception {
+	public static void main(String[] args) {
 		DatabaseCollection.initiateDB();
-		CoordinatorController coordinatorController = new CoordinatorController();
+		CoordinatorController coordinatorController;
 		scanner = new Scanner(System.in);
-		System.out.println("_______Welcome to Traingin Management System_____");
-		System.out.println("TrainingProgram Module");
-		System.out.println("Select Your Operation:------------");
-		System.out.println("1. Training Program Management");
-		System.out.println("2. Student Management");
+
 		int choice = 0;
+		boolean progrmRunner = true;
 		try {
-			choice = scanner.nextInt();
-		} catch (Exception e) {
+			coordinatorController = new CoordinatorController();
+			while (progrmRunner) {
+				System.out.println("_______Welcome to Traingin Management System_____");
+				System.out.println("TrainingProgram Module");
+				System.out.println("Select Your Operation:------------");
+				System.out.println("1. Training Program Management");
+				System.out.println("2. Student Management");
+				System.out.println("3. Exit");
+				choice = scanner.nextInt();
+
+				switch (choice) {
+				case 1:
+					coordinatorController.choice1Selection();
+					break;
+				case 2:
+					coordinatorController.choice2Selection();
+					break;
+				case 3:
+					progrmRunner = false;
+					break;
+
+				default:
+					System.out.println("Wrong Choice");
+				}
+
+			}
+		} catch (ProgramException e) {
 			System.err.println("Invalid input choice");
-			System.exit(0);
+			progrmRunner = false;
 		}
 
-		switch (choice) {
-		case 1:
-			try {
-				coordinatorController.choice1Selection();
-			} catch (ProgramException e) {
-				System.err.println(e.getMessage());
-			} catch (Exception e) {
-				System.err.println("Some Error Occured! Please Try after some time");
-			}
-			break;
-		case 2:
-			try {
-				coordinatorController.choice2Selection();
-			} catch (Exception e) {
-
-			}
-		case 3:
-			System.exit(0);
-			break;
-
-		default:
-			System.out.println("Wrong Choice");
-		}
 	}
 
 }

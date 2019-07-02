@@ -1,21 +1,13 @@
 package com.cg.tms.controller;
 
-
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-
-import com.cg.exception.CourseNotFoundException;
-import com.cg.exception.DatabaseWriteException;
-import com.cg.exception.InvalidFormatInput;
-import com.cg.exception.TrainingProgramNotFoundException;
 import com.cg.tms.beans.Center;
 import com.cg.tms.beans.Course;
 import com.cg.tms.beans.Program;
@@ -38,14 +30,13 @@ import com.cg.tms.util.UserInputValidator;
 
 public class CoordinatorController {
 	Scanner scanner;
-	private CoordinatorHelper coordinatorService;
 	private TrainingProgramService traingingProgramOpn;
 	private TrainerService trainerOperation;
 	private CourseService courseOperation;
 //	private IFetchAllDetails<Student> fetchOperation;
 	private IStudentManagement studentOpn;
 
-	public CoordinatorController() {
+	public CoordinatorController() throws ProgramException {
 
 		this.traingingProgramOpn = new TrainingProgramServiceImpl();
 		this.trainerOperation = new TrainerServiceImpl();
@@ -53,8 +44,7 @@ public class CoordinatorController {
 		this.studentOpn = new StudentServiceDaoImpl();
 	}
 
-	public void choice1Selection()
-			throws InvalidFormatInput, ProgramException {
+	public void choice1Selection() throws ProgramException {
 		scanner = new Scanner(System.in);
 		System.out.println("Select your option:---");
 		System.out.println("1. Create a Training Program");
@@ -81,11 +71,11 @@ public class CoordinatorController {
 			case 5:
 				updateTrainingProgram();
 			case 6:
-				System.exit(0);
+				return;
 			default:
 				System.out.println("Wrong choice entered!");
 			}
-		} catch (TrainingProgramNotFoundException | DateTimeParseException | InvalidFormatInput e) {
+		} catch (ProgramException e) {
 			System.err.println(e.getMessage());
 		} catch (InputMismatchException e) {
 			System.err.println("Wrong format input");
@@ -97,7 +87,7 @@ public class CoordinatorController {
 
 	}
 
-	private void getProgramDetails() throws ProgramException{
+	private void getProgramDetails() throws ProgramException {
 		System.out.println("Enter the Training Program Id from the list of Available Programs");
 		getAllRunningPrograms();
 		final String trainingId = scanner.next();
@@ -119,44 +109,40 @@ public class CoordinatorController {
 
 	}
 
-	private void getAllRunningPrograms() throws ProgramException{
+	private void getAllRunningPrograms() throws ProgramException {
 		System.out.println("Currently Running Programs:******************");
 		Set<Program> programs = traingingProgramOpn.retrieveAllTrainingProgram();
-//		programs.forEach(System.out::println);
-//		programs.forEach();
-//		programs.forEach(System.out.println((p)->p.getTrainingId().equals("TP_1001")));
-		Stream<Program> stream = programs.stream();
-		
-//		programs.
-	
-		Predicate<Program> p1 = (p)->p.getTrainingId().equals("TP_1002");
-		Consumer<Program> c1 = (p)->{
-//			if(p1.test(p))
-			System.out.println(p);
-		
-		};
-//		Supplier<Program> s1 = new 
-		stream.filter(p1).forEach(c1);
-//		programs.forEach(c1);
+		programs.forEach(System.out::println);
+
+		/*
+		 * //working with stream
+		 * 
+		 * // Stream<Program> stream = programs.stream(); // Predicate<Program> p1 = (p)
+		 * -> p.getTrainingId().equals("TP_1002"); // Consumer<Program> c1 = (p) -> { //
+		 * System.out.println(p); // }; // stream.filter(p1).forEach(c1);
+		 * 
+		 */
 
 	}
 
-	private void deleteProgram() throws ProgramException{
+	private void deleteProgram() throws ProgramException {
+		boolean status = false;
 		System.out.println("Select the trainingProgram You want to delete");
 		getAllRunningPrograms();
 		System.out.println("Enter the Training Program Id");
 		final String trainingId = scanner.next();
-
 		UserInputValidator.validateTrainingId(trainingId);
-
-		System.out.println("Before Deletion" + DatabaseCollection.program.size());
-		traingingProgramOpn.deleteTrainingProgram(trainingId);
-		System.out.println("Suceessfully Deleted");
-		System.out.println("After Deletion" + DatabaseCollection.program.size());
+		status = traingingProgramOpn.deleteTrainingProgram(trainingId);
+		if (status) {
+			System.out.println("Suceessfully Deleted");
+		} else {
+			System.out.println("Sorry We are unable to peroform your operation");
+		}
 	}
 
-	private void createProgram() throws ProgramException,
-			InvalidFormatInput, TrainingProgramNotFoundException, ProgramException {
+	private void createProgram() throws ProgramException {
+		boolean creationStatus = false;
+
 		System.out.println("Enter Training start " + "Date: yyyy-mm-dd ");
 		final String inputDate = scanner.next();
 		CoordinatorHelper.isDatenotExpired(inputDate);
@@ -174,7 +160,7 @@ public class CoordinatorController {
 		Set<Trainer> trainers = trainerOperation.getAllTrainers();
 		trainers.forEach(System.out::println);
 		final String trainerId = scanner.next();
-		UserInputValidator.validateTrainerId(trainerId);
+		UserInputValidator.validateEmployeeId(trainerId);
 		Trainer trainer = trainerOperation.getTrainerDetails(trainerId);
 
 		System.out.println("PickUp the Center by entering CenterId");
@@ -184,26 +170,29 @@ public class CoordinatorController {
 		final String centerId = scanner.next();
 		UserInputValidator.validateCenterId(centerId);
 		Center center = null;
-//		List<Center> centers = getAllAvailableCenters();
 		for (Center centerItr : centers) {
 			if (centerItr.getCenterId().equals(centerId)) {
 				center = centerItr;
 				break;
 			}
 		}
-//		Center center = coordinatorService.getValidCenter(centerId);
+		System.out.println("center"+center.centerId);
 
 		/* We are going to generate trainingId in trainingProgramImpl() */
-		String trainingId = CoordinatorHelper.generateStudentId();
+		String trainingId = CoordinatorHelper.generateTrainingId();
 		Program trainingProgram = new Program(trainingId, startDate, course, trainer, center);
+System.out.println(trainingProgram);
+		creationStatus = traingingProgramOpn.createProgram(trainingProgram);
 
-		System.out.println("Before addition" + DatabaseCollection.program.size());
-		traingingProgramOpn.createProgram(trainingProgram);
-		System.out.println("After addition" + DatabaseCollection.program.size());
+		if (creationStatus) {
+			System.out.println("Training Program Creation Success");
+		} else {
+			System.out.println("Oop!! We encountered an error!! Please Try again after some times");
+		}
 
 	}
 
-	public void choice2Selection() throws InvalidFormatInput, DatabaseWriteException, TrainingProgramNotFoundException, ProgramException, CourseNotFoundException {
+	public void choice2Selection() throws ProgramException {
 		scanner = new Scanner(System.in);
 		System.out.println("Select your option:---");
 		System.out.println("1. Enroll Student");
@@ -216,20 +205,40 @@ public class CoordinatorController {
 				enrollStudent();
 				break;
 			case 2:
+				removeStudent();
 				break;
 			case 3:
-				System.exit(0);
+				return;
 			default:
 				System.out.println("Wrong choice entered!");
 			}
+			return;
 		} catch (InputMismatchException e) {
 			System.err.println("Wrong format input");
 		}
 
 	}
 
-	private void enrollStudent() throws InvalidFormatInput, DatabaseWriteException, TrainingProgramNotFoundException, ProgramException, CourseNotFoundException {
+	private void removeStudent() throws ProgramException {
+		System.out.println("Enter Student id");
+		final String studentId= scanner.next();
+		UserInputValidator.validateStudentId(studentId);
+		System.out.println("Enter Training id");
+		final String trainingId=scanner.next();
+		UserInputValidator.validateTrainingId(trainingId);
+		boolean flag=false;
+		flag = studentOpn.removeStudent(studentId, trainingId);
+		if (flag) {
+			System.out.println("Successfully Deleted");
+		}
+		else {
+			System.err.println("Some error Occured in deletion");
+		}
+		return;
+	}
 
+	private void enrollStudent() throws ProgramException {
+		boolean enrollmentStatus = false;
 		System.out.println("Enter the Student First Name");
 		String studentFirstName = scanner.next();
 		System.out.println("Enter the Student Last Name");
@@ -246,9 +255,17 @@ public class CoordinatorController {
 		UserInputValidator.validateTrainingId(programId);
 
 		Student student = new Student(studentId, studentName);
+
 		Program program = traingingProgramOpn.retrieveTrainingProgram(programId);
-		studentOpn.enrollStudent(student, program);
-		System.out.println("SUCCESS" + DatabaseCollection.trPrograms.size());
+	
+		enrollmentStatus = studentOpn.enrollStudent(student, program);
+		if (enrollmentStatus) {
+			System.out.println("Student Successfully enrolled to Program");
+		} else {
+			System.out.println("We are facing some internal error!! Sorry for the enconvenience");
+		}
+
+		return;
 
 	}
 

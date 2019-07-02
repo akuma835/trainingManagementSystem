@@ -1,10 +1,6 @@
 package com.cg.tms.service;
 
 import java.util.*;
-
-import com.cg.exception.CourseNotFoundException;
-import com.cg.exception.DatabaseWriteException;
-import com.cg.exception.TrainingProgramNotFoundException;
 import com.cg.tms.beans.Course;
 import com.cg.tms.dao.CourseServiceDaoImpl;
 import com.cg.tms.dao.CrudService;

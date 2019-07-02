@@ -8,11 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.cg.exception.CourseNotFoundException;
-import com.cg.exception.DatabaseWriteException;
-import com.cg.exception.ExpiredDateException;
-import com.cg.exception.InvalidFormatInput;
-import com.cg.exception.TrainingProgramNotFoundException;
 import com.cg.tms.beans.Center;
 import com.cg.tms.beans.Course;
 import com.cg.tms.beans.Program;
@@ -22,6 +17,7 @@ import com.cg.tms.dao.FetchCentersImpl;
 import com.cg.tms.dao.IFetchAllDetails;
 import com.cg.tms.dao.IStudentManagement;
 import com.cg.tms.dao.StudentServiceDaoImpl;
+import com.cg.tms.exception.ProgramException;
 import com.cg.tms.service.CourseService;
 import com.cg.tms.service.CourseServiceImpl;
 import com.cg.tms.service.TrainerService;
@@ -61,18 +57,15 @@ public class CoordinatorHelper {
 //		return flag;
 //	}
 
-	public static  boolean isDatenotExpired(String inputDate) {
+	public static  boolean isDatenotExpired(String inputDate) throws ProgramException {
 		LocalDate startDate = null;
 		try {
 			startDate = LocalDate.parse(inputDate);
 			if (startDate.isBefore(LocalDate.now())) {
-				throw new ExpiredDateException("Date is already gone.Backdate not possible");
+				throw new ProgramException("Date is already gone.Backdate not possible");
 			}
-		} catch (ExpiredDateException e) {
-			System.err.println(e.getMessage());
-			System.exit(0);
 		} catch (DateTimeParseException e) {
-			throw e;
+			throw new ProgramException("Invalid Date format!! Please Enter in specific format");
 		}
 		return true;
 	}

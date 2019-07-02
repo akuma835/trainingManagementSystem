@@ -28,8 +28,8 @@ public class DatabaseCollection {
 	public static List<TrainingProgram> trPrograms = new ArrayList<>();
 
 	public static void initiateDB() {
-		course.add(new Course("CD_1001", "JAVA", "JAVA Fundamentals", 2500));
-		course.add(new Course("CD_1002", "C", "C basics", 1500));
+		course.add(new Course("CO_1001", "JAVA", "JAVA Fundamentals", 2500));
+		course.add(new Course("CO_1002", "C", "C basics", 1500));
 
 		center.add(new Center("CN_1001", "Capgemini SEZ", "Aeroli Navi Mumbai -700080"));
 		center.add(new Center("CN_1002", "Knowledge Park", "Thane Mumbai"));

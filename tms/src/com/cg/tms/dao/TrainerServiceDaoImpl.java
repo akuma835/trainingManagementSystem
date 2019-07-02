@@ -53,8 +53,8 @@ public class TrainerServiceDaoImpl implements CrudService<Trainer> {
 	public Set<Trainer> retrieveAll() throws ProgramException {
 		connection = ConnectionDB.getConnection();
 		Set<Trainer> trainers = new HashSet<Trainer>();
-		String trainersql = DBQueries.GET_ALL_TRAINER;
-		String skillSql = DBQueries.GET_SKILL_FOR_TRAINER;
+		final String trainersql = DBQueries.GET_ALL_TRAINER;
+		final String skillSql = DBQueries.GET_SKILL_FOR_TRAINER;
 
 		try {
 			PreparedStatement preparedStatementTrainers = connection.prepareStatement(trainersql);
@@ -85,7 +85,7 @@ public class TrainerServiceDaoImpl implements CrudService<Trainer> {
 //			preparedStatementSkills.close();
 			resultSetforTrainers.close();
 			preparedStatementTrainers.close();
-//			connection.close();
+
 
 		} catch (SQLException e) {
 			try {

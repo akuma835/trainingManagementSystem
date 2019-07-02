@@ -1,5 +1,6 @@
 package com.cg.tms.beans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -8,7 +9,12 @@ import javax.xml.stream.events.StartDocument;
 /**
  * 
  */
-public class Program {
+public class Program implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String trainingId;
 	private LocalDate trainingStartDate;
 	private Course course;

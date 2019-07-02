@@ -1,61 +1,59 @@
 package com.cg.tms.service;
 
 import java.util.Set;
-
-import com.cg.exception.CourseNotFoundException;
-import com.cg.exception.DatabaseWriteException;
-import com.cg.exception.TrainingProgramNotFoundException;
-import com.cg.tms.beans.Course;
 import com.cg.tms.beans.Program;
-import com.cg.tms.dao.CourseServiceDaoImpl;
 import com.cg.tms.dao.CrudService;
 import com.cg.tms.dao.TrainingProgramServiceDaoImpl;
 import com.cg.tms.exception.ErrorMessages;
 import com.cg.tms.exception.ProgramException;
 
 /**
+ * Training Program service IMPL class:
  * 
  */
 public class TrainingProgramServiceImpl implements TrainingProgramService {
-	CrudService<Course> crudOnCourse = new CourseServiceDaoImpl();
-	CrudService<Program> crudOnTrainingProgram = new TrainingProgramServiceDaoImpl();
+	final private CrudService<Program> crudTrainingProgram ;
+	
+	public TrainingProgramServiceImpl() throws ProgramException {
+		crudTrainingProgram = new TrainingProgramServiceDaoImpl();
+	}
 
 	@Override
-	public boolean createProgram(Program trainingProgram) throws ProgramException {
+	public boolean createProgram(final Program trainingProgram) throws ProgramException {
 		boolean flag = false;
-		flag = crudOnTrainingProgram.create(trainingProgram);
+		flag = crudTrainingProgram.create(trainingProgram);
 		return flag;
 	}
 
 	@Override
-	public boolean deleteTrainingProgram(String trainingId) throws ProgramException {
-		Program program = retrieveTrainingProgram(trainingId);
+	public boolean deleteTrainingProgram(final String trainingId) throws ProgramException {
+		final Program program = retrieveTrainingProgram(trainingId);
 		if (program == null) {
-
+			throw new ProgramException(ErrorMessages.MESSAGE9);
 		}
-		crudOnTrainingProgram.delete(program);
-		return false;
+		crudTrainingProgram.delete(program);
+		return true;
 	}
 
 	@Override
-	public boolean modifyTrainingProgram(Program trainingProgram) {
+	public boolean modifyTrainingProgram(final Program trainingProgram) {
+		/* Not yet implemented */
 		return false;
 	}
 
-	public boolean validateCourse(String courseId)
-			throws ProgramException {
-		final Course course = crudOnCourse.retrieve(courseId);
-		if (course != null)
-			return true;
-		else
-			return false;
-
-	}
+//	public boolean validateCourse(String courseId)
+//			throws ProgramException {
+//		final Course course = crudOnCourse.retrieve(courseId);
+//		if (course != null)
+//			return true;
+//		else
+//			return false;
+//
+//	}
 
 	@Override
-	public Program retrieveTrainingProgram(String trainingId)
-			throws ProgramException{
-		Set<Program> trainingPrograms = retrieveAllTrainingProgram();
+	public Program retrieveTrainingProgram(final String trainingId) throws ProgramException {
+		final Set<Program> trainingPrograms = retrieveAllTrainingProgram();
 		Program program = null;
 		for (Program trainingProgram : trainingPrograms) {
 			if (trainingProgram.getTrainingId().equals(trainingId)) {
@@ -64,16 +62,15 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
 			}
 		}
 		if (program == null) {
-			throw new ProgramException(ErrorMessages.MESSAGE6);
+			throw new ProgramException(ErrorMessages.MESSAGE9);
 		}
 		return program;
 	}
 
 	@Override
-	public Set<Program> retrieveAllTrainingProgram()
-			throws ProgramException{
+	public Set<Program> retrieveAllTrainingProgram() throws ProgramException {
 		Set<Program> trainingPrograms;
-		trainingPrograms = crudOnTrainingProgram.retrieveAll();
+		trainingPrograms = crudTrainingProgram.retrieveAll();
 		return trainingPrograms;
 	}
 
