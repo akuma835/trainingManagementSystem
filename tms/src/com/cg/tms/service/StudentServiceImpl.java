@@ -3,16 +3,22 @@ package com.cg.tms.service;
 import com.cg.tms.beans.Program;
 import com.cg.tms.beans.Student;
 import com.cg.tms.dao.IFetchAllDetails;
-import com.cg.tms.dao.IStudentManagement;
+import com.cg.tms.dao.StudentServiceDao;
 import com.cg.tms.dao.StudentServiceDaoImpl;
 import com.cg.tms.exception.ProgramException;
 
 public class StudentServiceImpl implements StudentService {
-	private IStudentManagement studentOpn;
+	
+private StudentServiceDao studentOpn;
+	
+
 	
 	
 	
-	
+
+	public StudentServiceImpl() {
+	this.studentOpn = new StudentServiceDaoImpl() ;
+}
 
 	public StudentServiceImpl(IFetchAllDetails<Student> studentOpn) {
 		super();

@@ -15,7 +15,7 @@ import com.cg.tms.beans.Student;
 import com.cg.tms.beans.Trainer;
 import com.cg.tms.dao.FetchCentersImpl;
 import com.cg.tms.dao.IFetchAllDetails;
-import com.cg.tms.dao.IStudentManagement;
+import com.cg.tms.dao.StudentServiceDao;
 import com.cg.tms.dao.StudentServiceDaoImpl;
 import com.cg.tms.exception.ProgramException;
 import com.cg.tms.service.CourseService;
@@ -29,7 +29,7 @@ public class CoordinatorHelper {
 	private TrainerService trainerOperation;
 	private CourseService courseOperation;
 //	private IFetchAllDetails<Student> fetchOperation;
-	private IStudentManagement studentOpn;
+	private StudentServiceDao studentOpn;
 
 //	public CoordinatorHelper() {
 //		this.courseOperation = new CourseServiceImpl();

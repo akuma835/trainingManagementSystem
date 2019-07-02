@@ -16,11 +16,13 @@ import com.cg.tms.beans.Trainer;
 import com.cg.tms.dao.DatabaseCollection;
 import com.cg.tms.dao.FetchCentersImpl;
 import com.cg.tms.dao.IFetchAllDetails;
-import com.cg.tms.dao.IStudentManagement;
+import com.cg.tms.dao.StudentServiceDao;
 import com.cg.tms.dao.StudentServiceDaoImpl;
 import com.cg.tms.exception.ProgramException;
 import com.cg.tms.service.CourseService;
 import com.cg.tms.service.CourseServiceImpl;
+import com.cg.tms.service.StudentService;
+import com.cg.tms.service.StudentServiceImpl;
 import com.cg.tms.service.TrainerService;
 import com.cg.tms.service.TrainerServiceImpl;
 import com.cg.tms.service.TrainingProgramService;
@@ -33,15 +35,14 @@ public class CoordinatorController {
 	private TrainingProgramService traingingProgramOpn;
 	private TrainerService trainerOperation;
 	private CourseService courseOperation;
-//	private IFetchAllDetails<Student> fetchOperation;
-	private IStudentManagement studentOpn;
+	private StudentService studentOpn;
 
 	public CoordinatorController() throws ProgramException {
 
 		this.traingingProgramOpn = new TrainingProgramServiceImpl();
 		this.trainerOperation = new TrainerServiceImpl();
 		this.courseOperation = new CourseServiceImpl();
-		this.studentOpn = new StudentServiceDaoImpl();
+		this.studentOpn = new StudentServiceImpl();
 	}
 
 	public void choice1Selection() throws ProgramException {
@@ -176,12 +177,12 @@ public class CoordinatorController {
 				break;
 			}
 		}
-		System.out.println("center"+center.centerId);
+		System.out.println("center" + center.centerId);
 
 		/* We are going to generate trainingId in trainingProgramImpl() */
 		String trainingId = CoordinatorHelper.generateTrainingId();
 		Program trainingProgram = new Program(trainingId, startDate, course, trainer, center);
-System.out.println(trainingProgram);
+		System.out.println(trainingProgram);
 		creationStatus = traingingProgramOpn.createProgram(trainingProgram);
 
 		if (creationStatus) {
@@ -221,17 +222,16 @@ System.out.println(trainingProgram);
 
 	private void removeStudent() throws ProgramException {
 		System.out.println("Enter Student id");
-		final String studentId= scanner.next();
+		final String studentId = scanner.next();
 		UserInputValidator.validateStudentId(studentId);
 		System.out.println("Enter Training id");
-		final String trainingId=scanner.next();
+		final String trainingId = scanner.next();
 		UserInputValidator.validateTrainingId(trainingId);
-		boolean flag=false;
+		boolean flag = false;
 		flag = studentOpn.removeStudent(studentId, trainingId);
 		if (flag) {
 			System.out.println("Successfully Deleted");
-		}
-		else {
+		} else {
 			System.err.println("Some error Occured in deletion");
 		}
 		return;
@@ -257,7 +257,7 @@ System.out.println(trainingProgram);
 		Student student = new Student(studentId, studentName);
 
 		Program program = traingingProgramOpn.retrieveTrainingProgram(programId);
-	
+
 		enrollmentStatus = studentOpn.enrollStudent(student, program);
 		if (enrollmentStatus) {
 			System.out.println("Student Successfully enrolled to Program");

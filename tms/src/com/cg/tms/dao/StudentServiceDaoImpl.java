@@ -13,7 +13,7 @@ import com.cg.tms.exception.ProgramException;
 import com.cg.tms.util.ConnectionDB;
 import com.cg.tms.util.DBQueries;
 
-public class StudentServiceDaoImpl implements IStudentManagement {
+public class StudentServiceDaoImpl implements StudentServiceDao {
 
 	@Override
 	public boolean enrollStudent(Student student, Program program) throws ProgramException {

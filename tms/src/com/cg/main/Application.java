@@ -10,10 +10,6 @@ import com.cg.tms.service.CourseService;
 
 public class Application {
 	static Scanner scanner;
-	private CourseService courseOperation;
-	private CoordinatorController coordinatorController;
-	private Program trainingProgram;
-
 	public static void main(String[] args) {
 		DatabaseCollection.initiateDB();
 		CoordinatorController coordinatorController;
