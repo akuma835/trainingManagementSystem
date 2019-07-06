@@ -127,8 +127,8 @@ public class CoordinatorController {
 		System.out.println("Select the trainingProgram You want to delete");
 		getAllRunningPrograms();
 		System.out.println("Enter the Training Program Id");
-		final String trainingId = scanner.next();
-		UserInputValidator.validateTrainingId(trainingId);
+		final int trainingId = scanner.nextInt();
+//		UserInputValidator.validateTrainingId(trainingId);
 		status = traingingProgramOpn.deleteTrainingProgram(trainingId);
 		if (status) {
 			System.out.println("Suceessfully Deleted");
@@ -168,7 +168,7 @@ public class CoordinatorController {
 		UserInputValidator.validateCenterId(centerId);
 		Center center = null;
 		for (Center centerItr : centers) {
-			if (centerItr.getCenterId().equals(centerId)) {
+			if (centerItr.getCenterId()==centerId) {
 				center = centerItr;
 				break;
 			}

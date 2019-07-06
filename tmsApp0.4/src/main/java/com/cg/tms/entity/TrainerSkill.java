@@ -21,7 +21,6 @@ public class TrainerSkill implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_TR_SKILL")
 	@SequenceGenerator(sequenceName = "seq_tr_skill", allocationSize = 1, name = "SEQ_TR_SKILL")
-	@Column(name = "id")
 	private int id;
 
 	@Column(name = "employeeid")

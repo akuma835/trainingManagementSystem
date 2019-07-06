@@ -6,5 +6,5 @@ import com.cg.tms.exception.ProgramException;
 
 public interface StudentServiceDao {
   boolean enrollStudent(Student student,Program program) throws ProgramException;
-  boolean removeStudent(String studnentId,String trainingProgramId) throws ProgramException;
+  boolean removeStudent(int studentId,int trainingProgramId) throws ProgramException;
 }

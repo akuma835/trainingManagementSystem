@@ -23,13 +23,13 @@ public class CourseServiceDaoImpl implements CrudService<Course> {
 	}
 
 	@Override
-	public Course retrieve(String courseId) throws ProgramException {
+	public Course retrieve(int courseId) throws ProgramException {
 
 		Set<Course> courses;
 		courses=retrieveAll();
 		Course course=null;
 		for (Course c : courses) {
-			if (courseId.equals(c.getCourseId())) {
+			if (courseId==(c.getCourseId())) {
 				course=c;
 			}
 		}

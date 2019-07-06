@@ -22,7 +22,7 @@ public interface CrudService<T> {
 	 * @throws ProgramException 
 	 * 
 	 */
-	public T retrieve(String o) throws ProgramException;
+	public T retrieve(int o) throws ProgramException;
 
 	/**
 	 * @throws ProgramException 

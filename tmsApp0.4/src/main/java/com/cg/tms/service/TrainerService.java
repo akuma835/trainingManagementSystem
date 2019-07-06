@@ -15,19 +15,19 @@ public interface TrainerService {
 	/**
 	 * 
 	 */
-	public boolean addSkillsToTrainer( String trainerId, Skills skill);
+	public boolean addSkillsToTrainer( int trainerId, Skills skill);
 
 	/**
 	 * 
 	 */
-	public boolean delSkillsToTrainer( String trainerId, Skills skills);
+	public boolean delSkillsToTrainer( int trainerId, Skills skills);
 
 	/**
 
 	 * @throws ProgramException 
 	 * 
 	 */
-	public Employee getTrainerDetails(String trainerId) throws ProgramException;
+	public Employee getTrainerDetails(int trainerId) throws ProgramException;
 
 	/**
 	 * @throws DatabaseWriteException 

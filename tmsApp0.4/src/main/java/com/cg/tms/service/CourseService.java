@@ -40,6 +40,6 @@ public interface CourseService {
 	 * @throws ProgramException 
 	 * 
 	 */
-	public Course getCourseDetails(String courseId) throws ProgramException;
+	public Course getCourseDetails(int courseId) throws ProgramException;
 
 }

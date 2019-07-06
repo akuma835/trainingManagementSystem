@@ -25,10 +25,10 @@ public class TrainerServiceDaoImpl implements CrudService<Employee> {
 	}
 
 	@Override
-	public Employee retrieve(String trainerId) throws ProgramException {
+	public Employee retrieve(int trainerId) throws ProgramException {
 		Set<Employee> trainerSet = retrieveAll();
 		for (Employee trainer : trainerSet) {
-			if (trainerId.equals(trainer.getEmpId())) {
+			if (trainerId==(trainer.getEmpId())) {
 				return trainer;
 			}
 		}

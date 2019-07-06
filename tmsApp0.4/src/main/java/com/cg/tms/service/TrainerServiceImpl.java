@@ -15,17 +15,17 @@ import com.cg.tms.exception.ProgramException;
 public class TrainerServiceImpl implements TrainerService {
 	CrudService<Employee> crudOperation = new TrainerServiceDaoImpl();
 	@Override
-	public boolean addSkillsToTrainer(String trainerId, Skills skill) {
+	public boolean addSkillsToTrainer(int trainerId, Skills skill) {
 		return false;
 	}
 
 	@Override
-	public boolean delSkillsToTrainer(String trainerId, Skills skills) {
+	public boolean delSkillsToTrainer(int trainerId, Skills skills) {
 		return false;
 	}
 
 	@Override
-	public Employee getTrainerDetails(String trainerId) throws ProgramException {
+	public Employee getTrainerDetails(int trainerId) throws ProgramException {
 		Employee trainer = crudOperation.retrieve(trainerId);
 
 		return trainer;

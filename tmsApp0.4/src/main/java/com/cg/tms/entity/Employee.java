@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -23,38 +24,40 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_EMPLOYEE")
 	@SequenceGenerator(sequenceName = "seq_employee", allocationSize = 1, name = "SEQ_EMPLOYEE")
-
-	@Column(name = "employeeId")
-	private String empId;
-	@Column(name = "employeeName")
-	private String empName;
-	@Column(name = "roleid")
+	private int employeeId;
+	private String employeeName;
+	@OneToOne
+	@JoinColumn(name = "roleid")
 	private Roles role;
-	
-	
-	public String getEmpId() {
-		return empId;
+
+	public int getEmpId() {
+		return employeeId;
 	}
-	public void setEmpId(String empId) {
-		this.empId = empId;
+
+	public void setEmpId(int empId) {
+		this.employeeId = empId;
 	}
+
 	public String getEmpName() {
-		return empName;
+		return employeeName;
 	}
+
 	public void setEmpName(String empName) {
-		this.empName = empName;
+		this.employeeName = empName;
 	}
+
 	public Roles getRole() {
 		return role;
 	}
+
 	public void setRole(Roles role) {
 		this.role = role;
 	}
 
-	public Employee(String empId, String empName, Roles role) {
+	public Employee(int empId, String empName, Roles role) {
 		super();
-		this.empId = empId;
-		this.empName = empName;
+		this.employeeId = empId;
+		this.employeeName = empName;
 		this.role = role;
 	}
 

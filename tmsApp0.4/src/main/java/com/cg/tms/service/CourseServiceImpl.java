@@ -37,7 +37,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public Course getCourseDetails(final String courseId) throws ProgramException {
+	public Course getCourseDetails(final int courseId) throws ProgramException {
 		Course course = crudOperation.retrieve(courseId);
 
 		return course;

@@ -20,11 +20,11 @@ public interface TrainingProgramService {
 	 * @throws ProgramException 
 	 * 
 	 */
-	public boolean deleteTrainingProgram(String trainingId) throws ProgramException;
+	public boolean deleteTrainingProgram(int trainingId) throws ProgramException;
 
 	public boolean modifyTrainingProgram(Program trainingProgram);
 	
-	public Program retrieveTrainingProgram(String trainingId) throws ProgramException;
+	public Program retrieveTrainingProgram(int trainingId) throws ProgramException;
 	
 	public Set<Program> retrieveAllTrainingProgram() throws ProgramException;
 

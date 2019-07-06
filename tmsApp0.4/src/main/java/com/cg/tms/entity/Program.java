@@ -27,15 +27,15 @@ public class Program implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PROGRAM")
 	@SequenceGenerator(sequenceName = "seq_program", allocationSize = 1, name = "SEQ_PROGRAM")
 
-	@Column(name = "trainingId")
-	private String trainingId;
-	@Column(name = "startDate")
-	private LocalDate trainingStartDate;
+
+	private int trainingId;
+
+	private LocalDate startDate;
 	@OneToOne
 	@JoinColumn(name = "courseId")
 	private Course course;
 	@OneToOne
-	@JoinColumn(name = "trainerId")
+	@JoinColumn(name = "employeeId")
 	private Employee employee;
 	@OneToOne
 	@JoinColumn(name = "centerId")
@@ -48,9 +48,9 @@ public class Program implements Serializable {
 	
 	
 
-	public Program(String trainingId, LocalDate trainingStartDate, Course course, Employee employee, Center center) {
+	public Program(int trainingId, LocalDate trainingStartDate, Course course, Employee employee, Center center) {
 	this.trainingId = trainingId;
-	this.trainingStartDate = trainingStartDate;
+	this.startDate = trainingStartDate;
 	this.course = course;
 	this.employee = employee;
 	this.center = center;
@@ -58,20 +58,20 @@ public class Program implements Serializable {
 
 
 
-	public String getTrainingId() {
+	public int getTrainingId() {
 		return trainingId;
 	}
 
-	public void setTrainingId(String trainingId) {
+	public void setTrainingId(int trainingId) {
 		this.trainingId = trainingId;
 	}
 
 	public LocalDate getTrainingStartDate() {
-		return trainingStartDate;
+		return startDate;
 	}
 
 	public void setTrainingStartDate(LocalDate trainingStartDate) {
-		this.trainingStartDate = trainingStartDate;
+		this.startDate = trainingStartDate;
 	}
 
 	public Course getCourse() {

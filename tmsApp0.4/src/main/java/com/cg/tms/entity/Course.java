@@ -11,38 +11,35 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "course")
 public class Course {
-	
-	public Course() {};
-	
+
+	public Course() {
+	};
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_COURSE")
 	@SequenceGenerator(sequenceName = "seq_course", allocationSize = 1, name = "SEQ_COURSE")
 
-	@Column(name = "courseId")
-	private String courseId;
-	
-	@Column(name = "courseName")
+	private int courseId;
+
 	private String courseName;
-	
-	@Column(name = "courseDesc")
+
 	private String courseDesc;
-	
-	@Column(name = "courseCharges")
+	@Column(name = "course_charges")
 	private int courseCharges;
 
-	public Course(String courseId, String courseName, String courseDesc, int courseCharges) {
-		super();
+	public Course(int courseId, String courseName, String courseDesc, int courseCharges) {
+
 		this.courseId = courseId;
 		this.courseName = courseName;
 		this.courseDesc = courseDesc;
 		this.courseCharges = courseCharges;
 	}
 
-	public String getCourseId() {
+	public int getCourseId() {
 		return courseId;
 	}
 
-	public void setCourseId(String courseId) {
+	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
 
@@ -73,11 +70,6 @@ public class Course {
 	@Override
 	public boolean equals(Object obj) {
 		return this.getCourseId() == getCourseId();
-	}
-
-	@Override
-	public int hashCode() {
-		return this.getCourseId().hashCode();
 	}
 
 	@Override

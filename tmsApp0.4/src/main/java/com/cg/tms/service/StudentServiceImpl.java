@@ -33,7 +33,7 @@ private StudentServiceDao studentOpn;
 	}
 
 	@Override
-	public boolean removeStudent(String studentId, String trainingProgramId) throws ProgramException {
+	public boolean removeStudent(int studentId, int trainingProgramId) throws ProgramException {
 		boolean status =studentOpn.removeStudent(studentId, trainingProgramId);
 		return status;
 	}

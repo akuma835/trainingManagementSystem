@@ -16,9 +16,8 @@ public class Roles {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ROLE")
 	@SequenceGenerator(sequenceName = "seq_role", allocationSize = 1, name = "SEQ_ROLE")
 
-	@Column(name = "roleId")
-	private String roleId;
-	@Column(name = "roleDesc")
+	private int roleId;
+@Column(name="role_desc")
 	private String roleDesc;
 
 	public Roles() {
@@ -26,11 +25,11 @@ public class Roles {
 
 
 
-	public String getRoleId() {
+	public int getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
 

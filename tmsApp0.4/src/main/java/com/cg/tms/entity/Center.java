@@ -1,11 +1,11 @@
 package com.cg.tms.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,28 +17,37 @@ public class Center {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CENTER")
 	@SequenceGenerator(sequenceName = "seq_center", allocationSize = 1, name = "SEQ_CENTER")
 
-	@Column(name = "centerId")
-	public String centerId;
-
-	@Column(name = "centerName")
-	public String centerName;
-
+	private  int centerId;
+	private String centerName;
+	@OneToOne
+	@JoinColumn(name="addressid")
+		private Address address;
 
 	public Center() {
-	};
-
-	public Center(String centerId, String centerName) {
-		super();
-		this.centerId = centerId;
-		this.centerName = centerName;
-		
 	}
 
-	public String getCenterId() {
+	public Center(int centerId, String centerName,Address address) {
+
+		this.centerId = centerId;
+		this.centerName = centerName;
+		this.address= address;
+
+	}
+	
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public int getCenterId() {
 		return centerId;
 	}
 
-	public void setCenterId(String centerId) {
+	public void setCenterId(int centerId) {
 		this.centerId = centerId;
 	}
 
@@ -50,23 +59,15 @@ public class Center {
 		this.centerName = centerName;
 	}
 
-
-
 	@Override
 	public boolean equals(Object obj) {
 		return this.centerId == ((Center) obj).centerId;
 	}
 
 	@Override
-	public int hashCode() {
-		// TODO Auto-generated method stub
-		return this.centerId.hashCode();
-	}
-
-	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "ID: " + centerId + " Center Name: " + centerName + " Address: " ;
+		return "ID: " + centerId + " Center Name: " + centerName + " Address: ";
 	}
 
 }

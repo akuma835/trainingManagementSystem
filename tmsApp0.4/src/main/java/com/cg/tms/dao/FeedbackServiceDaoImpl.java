@@ -21,7 +21,7 @@ public class FeedbackServiceDaoImpl implements CrudService<Feedback> {
 	}
 
 	@Override
-	public Feedback retrieve(String o) {
+	public Feedback retrieve(int o) {
 		// TODO Auto-generated method stub
 		return null;
 	}

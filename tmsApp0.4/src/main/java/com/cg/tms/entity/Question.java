@@ -15,22 +15,21 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_QUESTION")
 	@SequenceGenerator(sequenceName = "seq_question", allocationSize = 1, name = "SEQ_QUESTION")
 
-	@Column(name = "questionId")
-	private String questionId;
-	@Column(name="criteria")
+	private int questionId;
+	@Column(name="question_desc")
 	private String questionDesc;
 	
 	public Question() {}
 	
-	public Question(String questionId, String criteria) {
+	public Question(int questionId, String criteria) {
 		super();
 		this.questionId = questionId;
 		this.questionDesc = criteria;
 	}
-	public String getQuestionId() {
+	public int getQuestionId() {
 		return questionId;
 	}
-	public void setQuestionId(String questionId) {
+	public void setQuestionId(int questionId) {
 		this.questionId = questionId;
 	}
 	public String getCriteria() {

@@ -27,7 +27,7 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
 	}
 
 	@Override
-	public boolean deleteTrainingProgram(final String trainingId) throws ProgramException {
+	public boolean deleteTrainingProgram(final int trainingId) throws ProgramException {
 		final Program program = retrieveTrainingProgram(trainingId);
 		if (program == null) {
 			throw new ProgramException(ErrorMessages.MESSAGE9);
@@ -53,11 +53,11 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
 //	}
 
 	@Override
-	public Program retrieveTrainingProgram(final String trainingId) throws ProgramException {
+	public Program retrieveTrainingProgram(final int trainingId) throws ProgramException {
 		final Set<Program> trainingPrograms = retrieveAllTrainingProgram();
 		Program program = null;
 		for (Program trainingProgram : trainingPrograms) {
-			if (trainingProgram.getTrainingId().equals(trainingId)) {
+			if (trainingProgram.getTrainingId()==(trainingId)) {
 				program = trainingProgram;
 				break;
 			}

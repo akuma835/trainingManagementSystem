@@ -8,5 +8,5 @@ import java.util.List;
 public interface IFetchAllDetails<T> {
 	public List<T> retrieveAll();
 
-	public T retrieve(String id);
+	public T retrieve(int id);
 }

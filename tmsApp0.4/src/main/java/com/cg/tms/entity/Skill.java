@@ -15,15 +15,14 @@ public class Skill {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_SKILL")
 	@SequenceGenerator(sequenceName = "seq_skill", allocationSize = 1, name = "SEQ_SKILL")
 
-	@Column(name = "skillId")
-	private String skillId;
-	@Column(name = "skilldesc")
+	private int skillId;
+	@Column(name = "skill_desc")
 	private String skilldesc;
 
 	public Skill() {
 	}
 
-	public Skill(String skillId, String skilldesc) {
+	public Skill(int skillId, String skilldesc) {
 		this.skillId = skillId;
 		this.skilldesc = skilldesc;
 	}

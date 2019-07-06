@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -18,24 +16,20 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_STUDENT")
 	@SequenceGenerator(sequenceName = "seq_student", allocationSize = 1, name = "SEQ_STUDENT")
 
-	@Column(name="studentId")
-	private String studentId;
-	
-	@Column(name="studentName")
+	private int studentId;
 	private String studentName;
 	
 	
 	@Column(name="trainingId")
 	private Program program;
-	public transient static int studentSeq = 10;
 	
 	public Student() {};
 
-	public Student(String studentId, String studentName, Program program) {
+	public Student(int studentId, String studentName, Program program) {
 		this.studentId = studentId;
 		this.studentName = studentName;
 		this.program = program;
-		studentSeq++;
+
 	}
 
 	public Program getProgram() {
@@ -46,11 +40,11 @@ public class Student {
 		this.program = program;
 	}
 
-	public String getStudentId() {
+	public int getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentId(String studentId) {
+	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
 
@@ -62,15 +56,8 @@ public class Student {
 		this.studentName = studentName;
 	}
 
-	@Override
-	public int hashCode() {
-		return this.studentId.hashCode();
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return this.getStudentId().equals(((Student) obj).getStudentId());
-	}
+
 
 	@Override
 	public String toString() {

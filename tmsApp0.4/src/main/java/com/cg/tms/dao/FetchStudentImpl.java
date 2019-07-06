@@ -16,11 +16,11 @@ public class FetchStudentImpl implements IFetchAllDetails<Student> {
 	}
 
 	@Override
-	public Student retrieve(String id) {
+	public Student retrieve(int id) {
 		List<Student> students=retrieveAll();
 		Student student=null;
 		for (Student s:students) {
-			if (s.getStudentId().equals(id)) {
+			if (s.getStudentId()==(id)) {
 				student=s;
 				break;
 			}

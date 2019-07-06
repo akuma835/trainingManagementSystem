@@ -15,12 +15,12 @@ public class FetchCentersImpl implements IFetchAllDetails<Center> {
 	}
 
 	@Override
-	public Center retrieve(String id) {
+	public Center retrieve(int id) {
 		List<Center> centers;
 		Center center=null;
 		centers=retrieveAll();
 		for (Center c: centers) {
-			if (c.getCenterId().equals(id)) {
+			if (c.getCenterId()==(id)) {
 				center=c;
 				break;
 			}
