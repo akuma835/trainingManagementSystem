@@ -1,12 +1,11 @@
 package com.cg.tms.service;
 
-import java.util.*;
+import java.util.Set;
 
-import com.cg.tms.beans.Trainer;
-import com.cg.tms.dao.CourseServiceDaoImpl;
 import com.cg.tms.dao.CrudService;
 import com.cg.tms.dao.TrainerServiceDaoImpl;
-import com.cg.tms.entity.Course;
+import com.cg.tms.entity.Employee;
+import com.cg.tms.entity.TrainerSkill;
 import com.cg.tms.enums.Skills;
 import com.cg.tms.exception.ProgramException;
 
@@ -14,7 +13,7 @@ import com.cg.tms.exception.ProgramException;
  * 
  */
 public class TrainerServiceImpl implements TrainerService {
-	CrudService<Trainer> crudOperation = new TrainerServiceDaoImpl();
+	CrudService<Employee> crudOperation = new TrainerServiceDaoImpl();
 	@Override
 	public boolean addSkillsToTrainer(String trainerId, Skills skill) {
 		return false;
@@ -26,19 +25,19 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
-	public Trainer getTrainerDetails(String trainerId) throws ProgramException {
-		Trainer trainer = crudOperation.retrieve(trainerId);
+	public Employee getTrainerDetails(String trainerId) throws ProgramException {
+		Employee trainer = crudOperation.retrieve(trainerId);
 
 		return trainer;
 	}
 
 	@Override
-	public Set<Trainer> getAllTrainers() throws ProgramException{
+	public Set<Employee> getAllTrainers() throws ProgramException{
 		return crudOperation.retrieveAll();
 	}
 
 	@Override
-	public boolean createTrainer(Trainer trainer) {
+	public boolean createTrainer(Employee trainer) {
 		return false;
 	}
 

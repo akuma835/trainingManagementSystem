@@ -24,7 +24,7 @@ public class Student {
 	@Column(name="studentName")
 	private String studentName;
 	
-	@OneToOne
+	
 	@Column(name="trainingId")
 	private Program program;
 	public transient static int studentSeq = 10;

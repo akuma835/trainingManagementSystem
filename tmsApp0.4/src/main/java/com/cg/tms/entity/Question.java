@@ -18,14 +18,14 @@ public class Question {
 	@Column(name = "questionId")
 	private String questionId;
 	@Column(name="criteria")
-	private String criteria;
+	private String questionDesc;
 	
 	public Question() {}
 	
 	public Question(String questionId, String criteria) {
 		super();
 		this.questionId = questionId;
-		this.criteria = criteria;
+		this.questionDesc = criteria;
 	}
 	public String getQuestionId() {
 		return questionId;
@@ -34,10 +34,10 @@ public class Question {
 		this.questionId = questionId;
 	}
 	public String getCriteria() {
-		return criteria;
+		return questionDesc;
 	}
 	public void setCriteria(String criteria) {
-		this.criteria = criteria;
+		this.questionDesc = criteria;
 	}
 	
 	

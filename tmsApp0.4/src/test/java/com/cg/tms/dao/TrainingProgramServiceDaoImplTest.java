@@ -9,10 +9,10 @@ import java.util.Set;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.cg.tms.beans.Trainer;
 import com.cg.tms.entity.Center;
 import com.cg.tms.entity.Course;
 import com.cg.tms.entity.Program;
+import com.cg.tms.entity.TrainerSkill;
 import com.cg.tms.exception.ProgramException;
 
 public class TrainingProgramServiceDaoImplTest {
@@ -26,7 +26,7 @@ public class TrainingProgramServiceDaoImplTest {
 	public void testCreate() throws ProgramException {
 		Program program = new Program("TP_1002", LocalDate.parse("2019-09-09"),
 				new Course("CO_1001", "JAVA", "JAVA Fundamentals", 2500),
-				new Trainer("EM_1001", "Mr Vivek Acharya", "Bhubaneswar,IND", DatabaseCollection.tr_1001Skills),
+				new TrainerSkill("EM_1001", "Mr Vivek Acharya", "Bhubaneswar,IND", DatabaseCollection.tr_1001Skills),
 				new Center("CN_1001", "Knowledge Park", "Thane Mumbai"));
 		crudService.create(program);
 	}
@@ -54,7 +54,7 @@ public class TrainingProgramServiceDaoImplTest {
 	public void testDelete() throws ProgramException {
 		Program program = new Program("TP_1002", LocalDate.parse("2019-09-08"),
 				new Course("CO_1001", "JAVA", "JAVA Fundamentals", 2500),
-				new Trainer("EM_1001", "Mr Vivek Acharya", "Bhubaneswar,IND", DatabaseCollection.tr_1001Skills),
+				new TrainerSkill("EM_1001", "Mr Vivek Acharya", "Bhubaneswar,IND", DatabaseCollection.tr_1001Skills),
 				new Center("CN_1002", "Knowledge Park", "Thane Mumbai"));
 
 		crudService.delete(program);

@@ -28,37 +28,33 @@ public class Employee {
 	private String empId;
 	@Column(name = "employeeName")
 	private String empName;
-
-	@OneToOne
 	@Column(name = "roleid")
 	private Roles role;
-
-	public Employee(String empName, String empId) {
-		this.empName = empName;
-		this.empId = empId;
-	}
-
+	
+	
 	public String getEmpId() {
 		return empId;
 	}
-
 	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
-
 	public String getEmpName() {
 		return empName;
 	}
-
 	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
-
 	public Roles getRole() {
 		return role;
 	}
-
 	public void setRole(Roles role) {
+		this.role = role;
+	}
+
+	public Employee(String empId, String empName, Roles role) {
+		super();
+		this.empId = empId;
+		this.empName = empName;
 		this.role = role;
 	}
 

@@ -17,18 +17,15 @@ public class Skill {
 
 	@Column(name = "skillId")
 	private String skillId;
-	@Column(name = "employeeId")
-	private String employeeId;
-	@Column(name = "skill")
-	private String skill;
+	@Column(name = "skilldesc")
+	private String skilldesc;
 
 	public Skill() {
 	}
 
-	public Skill(String skillId, String employeeId, String skill) {
+	public Skill(String skillId, String skilldesc) {
 		this.skillId = skillId;
-		this.employeeId = employeeId;
-		this.skill = skill;
+		this.skilldesc = skilldesc;
 	}
 
 }

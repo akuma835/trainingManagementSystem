@@ -8,10 +8,11 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.cg.tms.beans.Trainer;
 import com.cg.tms.entity.Center;
 import com.cg.tms.entity.Course;
+import com.cg.tms.entity.Employee;
 import com.cg.tms.entity.Program;
+import com.cg.tms.entity.TrainerSkill;
 import com.cg.tms.exception.ErrorMessages;
 import com.cg.tms.exception.ProgramException;
 import com.cg.tms.util.ConnectionDB;
@@ -28,39 +29,39 @@ public class TrainingProgramServiceDaoImpl implements CrudService<Program> {
 	 */
 	@Override
 	public boolean create(final Program program) throws ProgramException {
-		int creationStatus = 0;
-		boolean flag = false;
-		final String sql = DBQueries.CREATE_PROGRAM;
-		final Connection connection = ConnectionDB.getConnection();
-		PreparedStatement preparedStatement = null;
-		try {
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, program.getTrainingId());
-			preparedStatement.setString(2, program.getCourse().getCourseId());
-			preparedStatement.setString(3, program.getTrainer().getEmpId());
-			preparedStatement.setString(4, program.getCenter().getCenterId());
-			preparedStatement.setDate(5, java.sql.Date.valueOf(program.getTrainingStartDate()));
-
-//			preparedStatement.setString(5, program.getTrainingStartDate().toString());
-			/* alternate code: java.sql.Date.valueOf(program.getTrainingStartDate()) */
-
-			creationStatus = preparedStatement.executeUpdate();
-			connection.commit();
-			preparedStatement.close();
-			if (creationStatus != 0) {
-				flag = true;
-			}
-		} catch (SQLException e) {
-e.printStackTrace();
-			throw new ProgramException(ErrorMessages.MESSAGE4);
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (SQLException e) {
-				throw new ProgramException(ErrorMessages.MESSAGE3);
-			}
-		}
-		return flag;
+//		int creationStatus = 0;
+//		boolean flag = false;
+//		final String sql = DBQueries.CREATE_PROGRAM;
+//		final Connection connection = ConnectionDB.getConnection();
+//		PreparedStatement preparedStatement = null;
+//		try {
+//			preparedStatement = connection.prepareStatement(sql);
+//			preparedStatement.setString(1, program.getTrainingId());
+//			preparedStatement.setString(2, program.getCourse().getCourseId());
+//			preparedStatement.setString(3, program.getTrainer().getEmpId());
+//			preparedStatement.setString(4, program.getCenter().getCenterId());
+//			preparedStatement.setDate(5, java.sql.Date.valueOf(program.getTrainingStartDate()));
+//
+////			preparedStatement.setString(5, program.getTrainingStartDate().toString());
+//			/* alternate code: java.sql.Date.valueOf(program.getTrainingStartDate()) */
+//
+//			creationStatus = preparedStatement.executeUpdate();
+//			connection.commit();
+//			preparedStatement.close();
+//			if (creationStatus != 0) {
+//				flag = true;
+//			}
+//		} catch (SQLException e) {
+//e.printStackTrace();
+//			throw new ProgramException(ErrorMessages.MESSAGE4);
+//		} finally {
+//			try {
+//				preparedStatement.close();
+//			} catch (SQLException e) {
+//				throw new ProgramException(ErrorMessages.MESSAGE3);
+//			}
+//		}
+		return true;
 	}
 
 	@Override
@@ -88,7 +89,7 @@ e.printStackTrace();
 
 				final LocalDate trainingStartDate = LocalDate.parse(resultSet.getDate(5).toString());
 				final Course course = new CourseServiceDaoImpl().retrieve(resultSet.getString(2));
-				final Trainer trainer = new TrainerServiceDaoImpl().retrieve(resultSet.getString(3));
+				final Employee trainer = new TrainerServiceDaoImpl().retrieve(resultSet.getString(3));
 				final Center center = new FetchCentersImpl().retrieve(resultSet.getString(4));
 
 				program = new Program(trainingId, trainingStartDate, course, trainer, center);
@@ -151,7 +152,7 @@ e.printStackTrace();
 				final LocalDate trainingStartDate = LocalDate.parse(resultSet.getDate(5).toString());
 
 				final Course course = new CourseServiceDaoImpl().retrieve(resultSet.getString(2));
-				final Trainer trainer = new TrainerServiceDaoImpl().retrieve(resultSet.getString(3));
+				final Employee trainer = new TrainerServiceDaoImpl().retrieve(resultSet.getString(3));
 				final Center center = new FetchCentersImpl().retrieve(resultSet.getString(4));
 
 				Program program = new Program(trainingId, trainingStartDate, course, trainer, center);

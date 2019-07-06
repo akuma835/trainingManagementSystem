@@ -2,7 +2,8 @@ package com.cg.tms.service;
 
 import java.util.*;
 
-import com.cg.tms.beans.Trainer;
+import com.cg.tms.entity.Employee;
+import com.cg.tms.entity.TrainerSkill;
 import com.cg.tms.enums.Skills;
 import com.cg.tms.exception.ProgramException;
 
@@ -26,7 +27,7 @@ public interface TrainerService {
 	 * @throws ProgramException 
 	 * 
 	 */
-	public Trainer getTrainerDetails(String trainerId) throws ProgramException;
+	public Employee getTrainerDetails(String trainerId) throws ProgramException;
 
 	/**
 	 * @throws DatabaseWriteException 
@@ -34,11 +35,11 @@ public interface TrainerService {
 	 * @throws CourseNotFoundException 
 	 * 
 	 */
-	public Set<Trainer> getAllTrainers() throws ProgramException;
+	public Set<Employee> getAllTrainers() throws ProgramException;
 
 	/**
 	 * 
 	 */
-	public boolean createTrainer(Trainer trainer);
+	public boolean createTrainer(Employee trainer);
 
 }

@@ -12,8 +12,8 @@ import javax.persistence.Table;
 @Table(name = "address")
 public class Address {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ADDRESS")
-	@SequenceGenerator(sequenceName = "seq_address", allocationSize = 1, name = "SEQ_ADDRESS")
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ADDRESS")
+//	@SequenceGenerator(sequenceName = "seq_address", allocationSize = 1, name = "SEQ_ADDRESS")
 	@Column(name = "id")
 	private int id;
 	@Column(name = "line1")
@@ -29,7 +29,7 @@ public class Address {
 	}
 
 	public Address(int id, String line1, String line2, String line3, int pin) {
-		super();
+
 		this.id = id;
 		this.line1 = line1;
 		this.line2 = line2;

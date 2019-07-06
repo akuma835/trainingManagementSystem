@@ -2,7 +2,6 @@ package com.cg.tms.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Comparator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import com.cg.tms.beans.Trainer;
 
 /**
  * 
@@ -39,27 +36,27 @@ public class Program implements Serializable {
 	private Course course;
 	@OneToOne
 	@JoinColumn(name = "trainerId")
-	private Trainer trainer;
+	private Employee employee;
 	@OneToOne
 	@JoinColumn(name = "centerId")
 	private Center center;
-	public static transient int tProgramSeq = 10;
 
-	public static final Comparator<Program> BY_TRAININGID = Comparator.comparing(Program::getTrainingId);
+//	public static final Comparator<Program> BY_TRAININGID = Comparator.comparing(Program::getTrainingId);
 
 	public Program() {
-	};
-
-	public Program(String trainingId, LocalDate trainingStartDate, Course course, Trainer trainer, Center center) {
-
-		this.trainingId = trainingId;
-		this.trainingStartDate = trainingStartDate;
-		this.course = course;
-		this.trainer = trainer;
-		this.center = center;
-		tProgramSeq++;
-
 	}
+	
+	
+
+	public Program(String trainingId, LocalDate trainingStartDate, Course course, Employee employee, Center center) {
+	this.trainingId = trainingId;
+	this.trainingStartDate = trainingStartDate;
+	this.course = course;
+	this.employee = employee;
+	this.center = center;
+}
+
+
 
 	public String getTrainingId() {
 		return trainingId;
@@ -85,12 +82,12 @@ public class Program implements Serializable {
 		this.course = course;
 	}
 
-	public Trainer getTrainer() {
-		return trainer;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setTrainer(Trainer trainer) {
-		this.trainer = trainer;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	public Center getCenter() {
@@ -101,10 +98,12 @@ public class Program implements Serializable {
 		this.center = center;
 	}
 
-	@Override
-	public String toString() {
-		return "Training ID: " + trainingId + " Start Date: " + trainingStartDate + " Course " + course.getCourseName()
-				+ " Trainer " + trainer.getEmpName() + " Center Name: " + center.getCenterName();
-	}
+	
+	
+//	@Override
+//	public String toString() {
+//		return "Training ID: " + trainingId + " Start Date: " + trainingStartDate + " Course " + course.getCourseName()
+//				+ " Trainer " + trainer. + " Center Name: " + center.getCenterName();
+//	}
 
 }

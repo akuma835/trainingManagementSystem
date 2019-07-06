@@ -16,7 +16,7 @@ public interface CrudService<T> {
 	/**
 	 * 
 	 */
-	public boolean update(T o);
+	public boolean update(T o) throws ProgramException ;
 
 	/**
 	 * @throws ProgramException 

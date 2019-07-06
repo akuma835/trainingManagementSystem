@@ -5,20 +5,15 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
-import com.cg.tms.beans.Trainer;
-import com.cg.tms.dao.DatabaseCollection;
 import com.cg.tms.dao.FetchCentersImpl;
 import com.cg.tms.dao.IFetchAllDetails;
-import com.cg.tms.dao.StudentServiceDao;
-import com.cg.tms.dao.StudentServiceDaoImpl;
 import com.cg.tms.entity.Center;
 import com.cg.tms.entity.Course;
+import com.cg.tms.entity.Employee;
 import com.cg.tms.entity.Program;
 import com.cg.tms.entity.Student;
+import com.cg.tms.entity.TrainerSkill;
 import com.cg.tms.exception.ProgramException;
 import com.cg.tms.service.CourseService;
 import com.cg.tms.service.CourseServiceImpl;
@@ -104,7 +99,7 @@ public class CoordinatorController {
 
 		System.out.println("Trainer Details: ");
 		System.out.println(
-				"Trainer Name: " + program.getTrainer().getEmpName() + " Skills: " + program.getTrainer().getSkills());
+				"Trainer Name: " + program.getEmployee().getEmpName() + " Skills: ");
 
 		System.out.println("Running Centers Details ");
 		System.out.println(program.getCenter());
@@ -159,11 +154,11 @@ public class CoordinatorController {
 		Course course = courseOperation.getCourseDetails(courseId);
 
 		System.out.println("Pickup the trainer by Entering TrainerId: ");
-		Set<Trainer> trainers = trainerOperation.getAllTrainers();
+		Set<Employee> trainers = trainerOperation.getAllTrainers();
 		trainers.forEach(System.out::println);
 		final String trainerId = scanner.next();
 		UserInputValidator.validateEmployeeId(trainerId);
-		Trainer trainer = trainerOperation.getTrainerDetails(trainerId);
+		Employee trainer = trainerOperation.getTrainerDetails(trainerId);
 
 		System.out.println("PickUp the Center by entering CenterId");
 		IFetchAllDetails<Center> fetchOperation = new FetchCentersImpl();
@@ -181,7 +176,7 @@ public class CoordinatorController {
 		System.out.println("center" + center.centerId);
 
 		/* We are going to generate trainingId in trainingProgramImpl() */
-		String trainingId = CoordinatorHelper.generateTrainingId();
+		String trainingId = null;
 		Program trainingProgram = new Program(trainingId, startDate, course, trainer, center);
 		System.out.println(trainingProgram);
 		creationStatus = traingingProgramOpn.createProgram(trainingProgram);
@@ -246,7 +241,7 @@ public class CoordinatorController {
 		String studentLastName = scanner.next();
 		final String studentName = studentFirstName + " " + studentLastName;
 		UserInputValidator.validateName(studentName);
-		String studentId = CoordinatorHelper.generateStudentId();
+		String studentId = null;
 
 		System.out.println("Select the available training Program");
 		Set<Program> programs = traingingProgramOpn.retrieveAllTrainingProgram();
@@ -254,10 +249,11 @@ public class CoordinatorController {
 		System.out.println("Enter the selected TrainingProgram ID");
 		final String programId = scanner.next();
 		UserInputValidator.validateTrainingId(programId);
-
-		Student student = new Student(studentId, studentName);
-
 		Program program = traingingProgramOpn.retrieveTrainingProgram(programId);
+		Student student = new Student(studentId, studentName,program);
+		
+
+		
 
 		enrollmentStatus = studentOpn.enrollStudent(student, program);
 		if (enrollmentStatus) {
